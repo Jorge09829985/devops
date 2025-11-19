@@ -2,13 +2,13 @@ version: "3.8"
 
 services:
   yoryiapp:
-    image: ghcr.io/jorge09829985/devops:latest
+    image: ghcr.io/jorge09829985/yoryi:latest
     deploy:
       replicas: 1
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.yoryiapp.entrypoints=http"
-        - "traefik.http.routers.yoryiapp.rule=Host(` `)"
+        - "traefik.http.routers.yoryiapp.rule=Host(`yoryi.byronrm.com`)"
         - "traefik.http.middlewares.yoryiapp-https-redirect.redirectscheme.scheme=https"
         - "traefik.http.routers.yoryiapp.middlewares=yoryiapp-https-redirect"
         - "traefik.http.routers.yoryiapp-secure.entrypoints=https"
