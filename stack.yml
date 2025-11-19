@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   jlapp:
-    image: ghcr.io/Jorge09829985/jl:latest
+    image: ghcr.io/jorge09829985/devops:latest
     deploy:
       replicas: 1
       labels:
