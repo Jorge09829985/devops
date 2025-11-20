@@ -83,14 +83,12 @@ jobs:
           password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
+            echo "✅ Desplegando servicios"
+            echo "==> Descargando la imagen del GHCR"
+            echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u Jorge09829985 --password-stdin
+            docker pull ghcr.io/Jorge09829985/yoryi:latest
             echo "🛑 Eliminando stack previo..."
-            docker stack rm yoryiapp || true
-            sleep 5
-
-            echo "📥 Descargando la última imagen..."
-            docker pull ghcr.io/jorge09829985/yoryi:latest
-
-            echo "🚀 Desplegando stack..."
-            docker stack deploy -c /home/${{ secrets.VPS_USER }}/despliegue/stack.yml --with-registry-auth yoryiapp
-
-            echo "✅ Despliegue completado"
+            docker stack rm jorge || true
+            sleep 30
+            echo "==> Desplegando stack..."
+            docker stack deploy -c /home/${{ secrets.VPS_USER }}/despliegue/stack.yml --with-registry-auth jorge
