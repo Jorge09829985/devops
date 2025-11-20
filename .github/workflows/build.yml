@@ -1,23 +1,35 @@
+<<<<<<< HEAD
 name: 🐍 Build & Push Yoryi App
+=======
+name: 🐍 Build & Deploy yoryi App
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
 
 on:
   push:
     branches:
       - main
+<<<<<<< HEAD
   pull_request:
+=======
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
 
 permissions:
   contents: read
   packages: write
 
 jobs:
+<<<<<<< HEAD
   build:
+=======
+  build-and-deploy:
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
     runs-on: ubuntu-latest
 
     steps:
       - name: 📦 Checkout code
         uses: actions/checkout@v4
 
+<<<<<<< HEAD
       - name: 🐍 Set up Python 3.12
         uses: actions/setup-python@v5
         with:
@@ -28,6 +40,8 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+=======
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
       - name: 🔐 Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -35,7 +49,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+<<<<<<< HEAD
       - name: 🏗️ Build and Push Docker image
+=======
+      - name: 🏗️ Build & Push Docker image
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -43,6 +61,7 @@ jobs:
           tags: |
             ghcr.io/jorge09829985/yoryi:latest
 
+<<<<<<< HEAD
       - name: ✅ Verify image build
         run: docker images ghcr.io/jorge09829985/yoryi
 
@@ -54,18 +73,29 @@ jobs:
 
       - name: 🧪 Probar conexión SSH
         uses: appleboy/ssh-action@v1
+=======
+      - name: 📁 Create deploy folder on VPS
+        uses: appleboy/ssh-action@v0.1.10
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
+<<<<<<< HEAD
             echo "✅ Conexión SSH OK"
             hostname
             whoami
 
       - name: 📤 Subir stack.yml al servidor
         uses: appleboy/scp-action@v1
+=======
+            mkdir -p /home/${{ secrets.VPS_USER }}/despliegue
+
+      - name: 📁 Copy stack.yml to VPS
+        uses: appleboy/scp-action@v0.1.7
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
@@ -74,14 +104,20 @@ jobs:
           source: "stack.yml"
           target: "/home/${{ secrets.VPS_USER }}/despliegue"
 
+<<<<<<< HEAD
       - name: 🚀 Despliegue del stack Yoryi
         uses: appleboy/ssh-action@v1
+=======
+      - name: 🚀 Deploy stack in VPS
+        uses: appleboy/ssh-action@v0.1.10
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
+<<<<<<< HEAD
             echo "🛑 Eliminando stack previo..."
             docker stack rm yoryiapp || true
             sleep 5
@@ -93,3 +129,9 @@ jobs:
             docker stack deploy -c /home/${{ secrets.VPS_USER }}/despliegue/stack.yml --with-registry-auth yoryiapp
 
             echo "✅ Despliegue completado"
+=======
+            cd /home/${{ secrets.VPS_USER }}/despliegue
+            docker pull ghcr.io/jorge09829985/yoryi:latest
+            docker stack deploy -c stack.yml yoryiapp
+            docker service update --force yoryiapp_yoryiapp
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de

@@ -8,7 +8,11 @@ HTML_TEMPLATE = """
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Jorge Escobar Chevere</title>
+=======
+    <title>JL. Escobar Ponce Chevere</title>
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -56,8 +60,13 @@ HTML_TEMPLATE = """
 </head>
 <body>
     <h1>Bienvenido 🚀</h1>
+<<<<<<< HEAD
     <p>Aplicación Flask diseñada por <strong>Jorge Escobar</strong></p>
     <a href="/saludo/jorge.escobar">Ver saludo personalizado</a>
+=======
+    <p>Aplicación Flask diseñada por <strong>JL. Escobar Ponce</strong></p>
+    <a href="/saludo/JL.escobarponce">Ver saludo personalizado</a>
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
     <footer>Powered by Flask & Traefik · 2025</footer>
 </body>
 </html>
@@ -73,7 +82,11 @@ def saludo(nombre):
     <html>
         <head>
             <meta charset='UTF-8'>
+<<<<<<< HEAD
             <title>Saludo de Jorge Escobar</title>
+=======
+            <title>Saludo de JL. Escobar Ponce</title>
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
             <style>
                 body {{
                     background: radial-gradient(circle at top left, #243B55, #141E30);
@@ -101,7 +114,11 @@ def saludo(nombre):
             </style>
         </head>
         <body>
+<<<<<<< HEAD
             <h2>Hola {nombre}, bienvenido a <strong>Jorge Escobar</strong> 🌟</h2>
+=======
+            <h2>Hola {nombre}, bienvenido a <strong>JL.escobarponce</strong> 🌟</h2>
+>>>>>>> ea4df20653b3f80dd22fe5763724c0668a4b91de
             <a href="/">Volver al inicio</a>
         </body>
     </html>
